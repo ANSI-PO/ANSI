@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/rider,visualstudio,visualstudiocode,windows,linux,notepadpp
 # Edit at https://www.toptal.com/developers/gitignore?templates=rider,visualstudio,visualstudiocode,windows,linux,notepadpp
 
+### CUSTOM ###
+.idea
+
 ### Linux ###
 *~
 
