@@ -1,0 +1,51 @@
+name: .net basic pipe
+on:
+  push:
+    branches: [ "feature/*" ]
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3 
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore  
+    - name: Build
+      run: dotnet build --no-restore
+      
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3 #checkout repository. Allows for checkout to our branch
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: run tests 
+      run: dotnet test --verbosity normal
+
+  code-linter:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
+
+        - name: Lint Code Base
+          uses: github/super-linter@v4
+          env:
+            VALIDATE_ALL_CODEBASE: false
+            DEFAULT_BRANCH: "main"
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
