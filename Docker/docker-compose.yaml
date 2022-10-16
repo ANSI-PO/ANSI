@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  database:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'true'
+      MYSQL_DATABASE: ${database_name}
+      MYSQL_USER: ${database_user}
+      MYSQL_PASSWORD: ${database_password}
+    volumes:
+      - mysqlVolANSI:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  mysqlVolANSI:
