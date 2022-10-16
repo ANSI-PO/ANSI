@@ -21,8 +21,10 @@ Nie korzystamy z 'git push -f' podczas pracy na branchu Main. Użycie force na p
 
 
 ## DOCKER
-
 tu znajdziesz informacje na temat pracy z gitem 
 
+#### Gdzie umieszczamy pliki 
+Do plików dockerowych przeznaczony jest osobny folder o nazwie Docker umieszczony w głównym katalogu.
+
 #### Docker readme
-Do plików dockerowych przeznaczony jest osobny folder. Plik readme w tym folderze ma pokazać jak należy skorzystać z docker-compose.
+Plik readme w tym folderze ma pokazać jak należy skorzystać z docker-compose.
