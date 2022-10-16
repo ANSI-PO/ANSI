@@ -14,9 +14,15 @@ Po stworzeniu pull requesta z brancha feature do main konieczne jest przejście 
 
 W przypadku dużej ilości commitów zalecam squashowanie ich do mniejszej liczby.
 
+Po skończeniu pracy na danym branchu należy go usunąć.
+
 #### Force politics 
 Nie korzystamy z 'git push -f' podczas pracy na branchu Main. Użycie force na pozostałych brachach jest dozwolone.
 
 
 ## DOCKER
+
+tu znajdziesz informacje na temat pracy z gitem 
+
+#### Docker readme
 Do plików dockerowych przeznaczony jest osobny folder. Plik readme w tym folderze ma pokazać jak należy skorzystać z docker-compose.
