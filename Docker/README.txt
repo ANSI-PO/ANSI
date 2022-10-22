@@ -1,6 +1,6 @@
 Jak to odpalić:
 - zainstaluj dockera na twój system operacyjny
-- uruchom będąc w tym folderze komendę 'docker compose up' w powershellu i nie zamykaj jego okna (tak długo jak będzie ono działać, będą działać osobne 'małe dwa komputerki')
+- uruchom będąc w tym folderze komendę "docker-compose --env-file compose.env up" w powershellu i nie zamykaj jego okna (tak długo jak będzie ono działać, będą działać osobne 'małe dwa komputerki')
 - uruchom adminera wchodząc pod link 'http://localhost:8080/?server=database' Adminer to nie baza danych a GUI
 - wprowadź dane logowania które zawarte są w pliku *.env (uwaga, zmiana tych danych spowoduje zmianę danych logowania. FYI Root password jest automatycznie, randomowo generowane)
 - sama baza danych działa na porcie 3306
