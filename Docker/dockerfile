@@ -1,0 +1,8 @@
+FROM mysql
+
+ARG DB_PASSWORD
+
+ENV MYSQL_ROOT_PASSWORD $DB_PASSWORD
+
+COPY ./DbSqlQueries/CREATE_TABLES.sql /docker-entrypoint-initdb.d/ON_RUN.sql
+EXPOSE 3306:3306
