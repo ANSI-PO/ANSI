@@ -20,4 +20,4 @@ services:
     ports:
       - 8080:8080
     depends_on: 
-    - mysql_ANSI_db
+    - mysql_ansi_db

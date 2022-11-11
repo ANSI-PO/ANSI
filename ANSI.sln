@@ -4,7 +4,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6AAC3E2C-D9F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9AF1666D-04C1-4B17-9FA4-25FCE191AD2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{5F21BAFA-5505-456F-990B-D12E358FCE7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{8160C322-3A16-401A-8C14-143A2D2A8B9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{ADAF4D67-9EBC-4DAB-85BC-62AD35953CA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,12 +14,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F21BAFA-5505-456F-990B-D12E358FCE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F21BAFA-5505-456F-990B-D12E358FCE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F21BAFA-5505-456F-990B-D12E358FCE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F21BAFA-5505-456F-990B-D12E358FCE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8160C322-3A16-401A-8C14-143A2D2A8B9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8160C322-3A16-401A-8C14-143A2D2A8B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8160C322-3A16-401A-8C14-143A2D2A8B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8160C322-3A16-401A-8C14-143A2D2A8B9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADAF4D67-9EBC-4DAB-85BC-62AD35953CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADAF4D67-9EBC-4DAB-85BC-62AD35953CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADAF4D67-9EBC-4DAB-85BC-62AD35953CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADAF4D67-9EBC-4DAB-85BC-62AD35953CA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5F21BAFA-5505-456F-990B-D12E358FCE7E} = {6AAC3E2C-D9F9-489E-AE1B-3ACBE2775B7C}
+		{8160C322-3A16-401A-8C14-143A2D2A8B9B} = {6AAC3E2C-D9F9-489E-AE1B-3ACBE2775B7C}
+		{ADAF4D67-9EBC-4DAB-85BC-62AD35953CA2} = {6AAC3E2C-D9F9-489E-AE1B-3ACBE2775B7C}
 	EndGlobalSection
 EndGlobal
