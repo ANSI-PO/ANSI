@@ -30,6 +30,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
         
+    - name: Build container for tests
+      run: docker-compose --env-file compose.env up   
     - name: Restore dependencies
       run: dotnet restore
     - name: run tests 
