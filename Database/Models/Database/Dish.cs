@@ -1,6 +1,7 @@
 ﻿namespace Database.Models.Database
 {
-    public partial class Dish
+    //do not touch. Used only for communication with db
+    public sealed partial class Dish
     {
         public int DishId { get; set; }
         public string DishName { get; set; } = null!;

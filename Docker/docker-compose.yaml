@@ -11,7 +11,7 @@ services:
         DB_PASSWORD: ${PASSWORD}
     restart: always
     ports:
-        - 3306:3306
+      - 3306:3306
 
   mysql_ansi_dbms:
     container_name: mysql_ansi_dbms
@@ -19,5 +19,5 @@ services:
     restart: always
     ports:
       - 8080:8080
-    depends_on: 
-    - mysql_ansi_db
+    depends_on:
+      - mysql_ansi_db

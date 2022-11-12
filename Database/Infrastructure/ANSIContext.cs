@@ -1,16 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Database.Models.Database;
+using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
 
-namespace Database.Models.Database
+namespace Database.Infrastructure
 {
-    public partial class ANSIContext : DbContext
+    internal partial class ANSIContext : DbContext
     {
-        public ANSIContext()
+        private readonly MySqlConnection _connection;
+
+        public ANSIContext(MySqlConnection con)
         {
+            _connection = con;
         }
 
-        public ANSIContext(DbContextOptions<ANSIContext> options)
+        public ANSIContext(DbContextOptions<ANSIContext> options, MySqlConnection con)
             : base(options)
         {
+            _connection = con;
         }
 
         public virtual DbSet<Dish> Dishes { get; set; } = null!;
@@ -19,8 +25,7 @@ namespace Database.Models.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("server=localhost;port=3306;database=ANSI;uid=root;pwd=DevUserPassword", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.31-mysql"));
+                optionsBuilder.UseMySql(_connection, ServerVersion.Parse("8.0.31-mysql"));
             }
         }
 
