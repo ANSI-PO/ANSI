@@ -20,7 +20,7 @@ internal class DishDatabase : IDishDatabase
     public async Task<IEnumerable<DishModel>> SelectDishes(Expression<Func<Dish, bool>> query)
     {
         var queryResult = await _dishRepository.GetDishes(query);
-        return queryResult.Select(x=> _mapper.Map<DishModel>(x));
+        return queryResult.Select(x => _mapper.Map<DishModel>(x));
     }
 
     public async Task<IEnumerable<string>> GetUniqueMainCategories() =>
@@ -37,5 +37,4 @@ internal class DishDatabase : IDishDatabase
 
     public async Task<IEnumerable<IEnumerable<string>>> GetAvailableIngredientsTags() =>
         await _dishRepository.GetAvailableIngredientsTags();
-
 }

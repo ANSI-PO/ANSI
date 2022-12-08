@@ -1,5 +1,5 @@
 ﻿using Domain.Abstractions;
-using DishModel = Domain.Models.DishModel;
+using Domain.Models;
 
 namespace Domain.Services;
 
@@ -16,19 +16,16 @@ public class DishSelectorService : IDishSelectorService
 
     public async Task<IEnumerable<DishModel>> SelectDishes()
     {
-        
-        
         //example request
         var uniquePrepTime = await _database.GetUniquePreparationTime();
+
         // create expression via builder pattern 
         var expression = _queryBuilder
             .BasedOn(x => x.MakeTimeMin == int.Parse(uniquePrepTime.First()))
             .BuildDishExpression();
 
-
         //we receive some list of Dishes  
         var results = await _database.SelectDishes(expression);
-
 
         return results;
     }

@@ -12,6 +12,4 @@ public interface IDishRepository
     Task<IEnumerable<string>> GetUniquePreparationDifficulty();
     Task<IEnumerable<string>> GetUniqueIngredientsCategory();
     Task<IEnumerable<IEnumerable<string>>> GetAvailableIngredientsTags();
-
-
 }

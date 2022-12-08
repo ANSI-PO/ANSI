@@ -139,7 +139,7 @@ public class DatabaseIntegrationTests
         //make flatten list and generate values id hashes
         var customHashes = result
             .Select(x => x.Aggregate("", (accu, item) => accu + item.GetHashCode()));
-        
+
         //assert
         result.Should().NotBeEmpty();
         customHashes.Should().OnlyHaveUniqueItems();
