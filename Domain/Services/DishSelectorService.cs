@@ -17,7 +17,8 @@ public class DishSelectorService : IDishSelectorService
 
     public async Task<IEnumerable<DishModel>> SelectDishes()
     {
-        //example request
+        //todo:prepare example request
+        /*//example request
         var ingredientsToLookFor = new[] {IngredientsCategoryTypes.Meat, IngredientsCategoryTypes.Fish};
 
         // create expression via builder pattern 
@@ -34,6 +35,6 @@ public class DishSelectorService : IDishSelectorService
         var results = await _database.SelectDishes(expression);
 
 
-        return results;
+        return results;*/
     }
 }
