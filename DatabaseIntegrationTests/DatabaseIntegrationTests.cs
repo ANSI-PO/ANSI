@@ -34,10 +34,10 @@ public class DatabaseIntegrationTests
 
         dish.DishId.Should().Be(332);
         dish.DishName.Should().Be("Antrykot wołowy po amerykańsku");
-        dish.MainCategory.Should().Be(MainCategoryTypes.American);
-        dish.PreparationDifficulty.Should().Be(PreparationDifficultyTypes.Easy);
-        dish.IngredientsCategory.Should().Be(IngredientsCategoryTypes.Meat);
-        dish.IngredientsTags.Should().Be(IngredientsTagsTypes.Beef);
+        dish.MainCategory.Should().Be("Amerykańska");
+        dish.PreparationDifficulty.Should().Be("łatwy");
+        dish.IngredientsCategory.Should().Be("Mięso");
+        dish.IngredientsTags.Should().Be("Wołowina");
     }
 
     [Fact]
@@ -48,16 +48,16 @@ public class DatabaseIntegrationTests
         Expression<Func<Dish, bool>> input = x =>
             x.DishId != 332
             && x.MakeTimeMin >= 60
-            && x.IngredientsCategory == IngredientsCategoryTypes.Meat
-            && x.MainCategory == MainCategoryTypes.American
-            && x.PreparationDifficulty == PreparationDifficultyTypes.Easy;
+            && x.IngredientsCategory == "Mięso"
+            && x.MainCategory == "Amerykańska"
+            && x.PreparationDifficulty == "łatwy";
 
         var testConstraints = (DishModel dish) =>
             dish.DishId != 332
             && dish.MakeTimeMin >= 60
-            && dish.IngredientsCategory == IngredientsCategoryTypes.Meat
-            && dish.MainCategory == MainCategoryTypes.American
-            && dish.PreparationDifficulty == PreparationDifficultyTypes.Easy;
+            && dish.IngredientsCategory == "Mięso"
+            && dish.MainCategory == "Amerykańska"
+            && dish.PreparationDifficulty == "łatwy";
 
         //act
         var result = (await sut.GetDishes(input)).ToArray();
@@ -68,6 +68,84 @@ public class DatabaseIntegrationTests
     }
 
     [Fact]
+    public async Task GivenValidData_WhenRequestingForIngredientsCategory_ShouldReturnUniqueResults()
+    {
+        //arrange
+        var sut = _fixture.CreateSut();
+
+        //act
+        var result = (await sut.GetUniqueIngredientsCategory()).ToArray();
+
+        //assert
+        result.Should().NotBeEmpty();
+        result.Should().OnlyHaveUniqueItems();
+        result.Should().Contain(new[] { "Mięso", "Oba", "Ryby" });
+    }
+
+    [Fact]
+    public async Task GivenValidData_WhenRequestingForPreparationDifficulty_ShouldReturnUniqueResults()
+    {
+        //arrange
+        var sut = _fixture.CreateSut();
+
+        //act
+        var result = (await sut.GetUniquePreparationDifficulty()).ToArray();
+
+        //assert
+        result.Should().NotBeEmpty();
+        result.Should().OnlyHaveUniqueItems();
+        result.Should().Contain(new[] { "łatwy", "średni", "trudny" });
+    }
+
+    [Fact]
+    public async Task GivenValidData_WhenRequestingForMainCategories_ShouldReturnUniqueResults()
+    {
+        //arrange
+        var sut = _fixture.CreateSut();
+
+        //act
+        var result = (await sut.GetUniqueMainCategories()).ToArray();
+
+        //assert
+        result.Should().NotBeEmpty();
+        result.Should().OnlyHaveUniqueItems();
+        result.Should().Contain(new[] { "Francuska", "Orientalna", "Polska" });
+    }
+
+    [Fact]
+    public async Task GivenValidData_WhenRequestingForPreparationTime_ShouldReturnUniqueResults()
+    {
+        //arrange
+        var sut = _fixture.CreateSut();
+
+        //act
+        var result = (await sut.GetUniquePreparationTime()).ToArray();
+
+        //assert
+        result.Should().NotBeEmpty();
+        result.Should().OnlyHaveUniqueItems();
+        result.Select(x => int.TryParse(x, out _)).Should().Match(seq => seq.All(b => b == true));
+        result.Should().Contain(new[] { "15", "45", "70" });
+    }
+
+    [Fact]
+    public async Task GivenValidData_WhenRequestingForIngredientsTags_ShouldReturnUniqueResults()
+    {
+        //arrange
+        var sut = _fixture.CreateSut();
+
+        //act
+        var result = (await sut.GetAvailableIngredientsTags()).ToArray();
+        //make flatten list and generate values id hashes
+        var customHashes = result
+            .Select(x => x.Aggregate("", (accu, item) => accu + item.GetHashCode()));
+        
+        //assert
+        result.Should().NotBeEmpty();
+        customHashes.Should().OnlyHaveUniqueItems();
+    }
+
+    [Fact]
     public async Task
         GivenInvalidData_WhenRequestIsTooComplicatedForEntityFramework_ShouldThrowDatabaseQueryExecutionException()
     {
@@ -75,7 +153,6 @@ public class DatabaseIntegrationTests
         var sut = _fixture.CreateSut();
         Expression<Func<Dish, bool>> input = x =>
             x.DishName.StartsWith('a');
-
 
         //act
         Func<Task> act = () => sut.GetDishes(input);
