@@ -1,5 +1,6 @@
 ﻿using Domain.Abstractions;
 using Domain.Models;
+using DishModel = Domain.Models.DishModel;
 
 namespace Domain.Services;
 
@@ -28,5 +29,22 @@ public class DishSelectorService : IDishSelectorService
         var results = await _database.SelectDishes(expression);
 
         return results;
+    }
+
+    public Task<List<QuestionModel>> GetFirstQuestion ()
+    {
+        List<AnswerModel> odpowiedzi = new List<AnswerModel> ();
+        List<QuestionModel> pytania = new List<QuestionModel> ();
+        QuestionModel quest = new QuestionModel();
+        var kategorie = MainCategoryTypes.Greek
+
+        quest.QuestionId = 1;
+        quest.QuestionName = "Jaką kuchnie wybierasz? ";
+        
+        
+
+        pytania.Add();
+
+        return ;
     }
 }
