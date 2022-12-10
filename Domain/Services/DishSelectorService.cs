@@ -1,6 +1,5 @@
-﻿using Database.Models;
-using Domain.Abstractions;
-using DishModel = Domain.Models.DishModel;
+﻿using Domain.Abstractions;
+using Domain.Models;
 
 namespace Domain.Services;
 
@@ -18,21 +17,15 @@ public class DishSelectorService : IDishSelectorService
     public async Task<IEnumerable<DishModel>> SelectDishes()
     {
         //example request
-        var ingredientsToLookFor = new[] {IngredientsCategoryTypes.Meat, IngredientsCategoryTypes.Fish};
+        var uniquePrepTime = await _database.GetUniquePreparationTime();
 
         // create expression via builder pattern 
         var expression = _queryBuilder
-            .BasedOn(x => x.MakeTimeMin > 10)
-            .AndWith(x => ingredientsToLookFor.Contains(x.IngredientsCategory))
-            .AndWith(x => x.MakeTimeMin < 120)
-            .AndWith(x => x.PreparationDifficulty == PreparationDifficultyTypes.Easy)
-            .AndWith(x => x.MainCategory == MainCategoryTypes.American)
+            .BasedOn(x => x.MakeTimeMin == int.Parse(uniquePrepTime.First()))
             .BuildDishExpression();
-
 
         //we receive some list of Dishes  
         var results = await _database.SelectDishes(expression);
-
 
         return results;
     }
