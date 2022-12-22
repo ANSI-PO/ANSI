@@ -11,5 +11,7 @@ public interface IDishDatabase
     Task<IEnumerable<string>> GetUniquePreparationTime();
     Task<IEnumerable<string>> GetUniquePreparationDifficulty();
     Task<IEnumerable<string>> GetUniqueIngredientsCategory();
-    Task<IEnumerable<IEnumerable<string>>> GetAvailableIngredientsTags();
+    //Task<IEnumerable<IEnumerable<string>>> GetAvailableIngredientsTags();
+
+    Task<IEnumerable<string>> GetUniqueTags();
 }
