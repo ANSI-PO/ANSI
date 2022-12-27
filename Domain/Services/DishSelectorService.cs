@@ -206,13 +206,16 @@ public class DishSelectorService : IDishSelectorService
         }
 
         var expression = _queryBuilder
-            .BasedOn(x => mainCategoryToLookFor.Contains(x.IngredientsCategory))
+            .BasedOn(x => mainCategoryToLookFor.Contains(x.MainCategory))
             .AndWith(x => preparationTimeToLookFor.Contains(x.MakeTimeMin))
             .AndWith(x => preparationDifficultyToLookFor.Contains(x.PreparationDifficulty))
-            .AndWith(x => ingredientsCategoryToLookFor.Contains(x.IngredientsCategory))
-            .AndWith(x => uniqueIngredientsToLookFor.Contains(x.IngredientsTags))
-            .BuildDishExpression();
-        var results = await _database.SelectDishes(expression);
-        return results;
+            .AndWith(x => ingredientsCategoryToLookFor.Contains(x.IngredientsCategory));
+        
+        foreach (var ingredient in uniqueIngredientsToLookFor)
+        {
+            expression.AndWith(x => x.IngredientsTags.Contains(ingredient));
+        }
+        
+        return await _database.SelectDishes(expression.BuildDishExpression());
     }
 }

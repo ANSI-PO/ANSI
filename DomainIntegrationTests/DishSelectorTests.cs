@@ -119,6 +119,8 @@ namespace DomainIntegrationTests
             var response = await sut.GetDish(models);
 
             response.Should().NotBeNull();
+            response.Should().NotBeEmpty();
+            
         }
 
 
