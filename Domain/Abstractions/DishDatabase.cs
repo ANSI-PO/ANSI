@@ -35,6 +35,23 @@ internal class DishDatabase : IDishDatabase
     public async Task<IEnumerable<string>> GetUniqueIngredientsCategory() =>
         await _dishRepository.GetUniqueIngredientsCategory();
 
-    public async Task<IEnumerable<IEnumerable<string>>> GetAvailableIngredientsTags() =>
-        await _dishRepository.GetAvailableIngredientsTags();
+    public async Task<IEnumerable<string>> GetUniqueTags()
+    {
+        var x = await _dishRepository.GetAvailableIngredientsTags();
+        var lista = new List<string>();
+        return
+            x.Aggregate(lista, (a, b) =>
+            {
+                foreach (var item in b)
+                {
+                    if (a.Contains(item) is false)
+                    {
+                        a.Add(item);
+                    }
+                }  
+                return lista;
+            });
+    }
+
+    
 }

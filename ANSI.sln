@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6AAC3E2C-D9F9-489E-AE1B-3ACBE2775B7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{8160C322-3A16-401A-8C14-143A2D2A8B9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{8160C322-3A16-401A-8C14-143A2D2A8B9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{EF08CB6F-D025-427A-B490-58D6F6E3961E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{EF08CB6F-D025-427A-B490-58D6F6E3961E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1B6802D9-0C04-4653-87F7-202EE54E6D6B}"
 EndProject
@@ -12,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{834FFE5D-815D-4D0E-B01F-99A8B5452921}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseIntegrationTests", "DatabaseIntegrationTests\DatabaseIntegrationTests.csproj", "{38F13EFB-4A98-47AA-9457-FE7885E999FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseIntegrationTests", "DatabaseIntegrationTests\DatabaseIntegrationTests.csproj", "{38F13EFB-4A98-47AA-9457-FE7885E999FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainIntegrationTests", "DomainIntegrationTests\DomainIntegrationTests.csproj", "{FF700FA2-F86F-4438-9928-620D079076EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +37,13 @@ Global
 		{38F13EFB-4A98-47AA-9457-FE7885E999FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38F13EFB-4A98-47AA-9457-FE7885E999FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38F13EFB-4A98-47AA-9457-FE7885E999FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF700FA2-F86F-4438-9928-620D079076EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF700FA2-F86F-4438-9928-620D079076EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF700FA2-F86F-4438-9928-620D079076EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF700FA2-F86F-4438-9928-620D079076EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8160C322-3A16-401A-8C14-143A2D2A8B9B} = {6AAC3E2C-D9F9-489E-AE1B-3ACBE2775B7C}
@@ -39,5 +51,9 @@ Global
 		{05E39194-548F-4158-97E0-2135395783F9} = {1B6802D9-0C04-4653-87F7-202EE54E6D6B}
 		{834FFE5D-815D-4D0E-B01F-99A8B5452921} = {1B6802D9-0C04-4653-87F7-202EE54E6D6B}
 		{38F13EFB-4A98-47AA-9457-FE7885E999FC} = {05E39194-548F-4158-97E0-2135395783F9}
+		{FF700FA2-F86F-4438-9928-620D079076EA} = {05E39194-548F-4158-97E0-2135395783F9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E219A762-35A7-49C9-BBBF-EA31B4C892A1}
 	EndGlobalSection
 EndGlobal
