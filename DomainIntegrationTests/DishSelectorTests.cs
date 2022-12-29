@@ -1,14 +1,11 @@
-using Database.Infrastructure;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Domain.Infrastructure;
-using Database.Repository;
-using Microsoft.Extensions.DependencyInjection;
-using Xunit;
+using Domain.Models;
 using Domain.Services;
 using FluentAssertions;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Domain.Models;
-using System.Linq.Expressions;
+using Microsoft.Extensions.DependencyInjection;
+using Xunit;
 
 namespace DomainIntegrationTests
 {
@@ -16,8 +13,6 @@ namespace DomainIntegrationTests
     {
         private readonly DomainIntegrationTestFixture _fixture = new DomainIntegrationTestFixture();
 
-
-        
         [Fact]
         public async Task QuestionsReturnsListsOfAnswers()
         {
@@ -34,93 +29,99 @@ namespace DomainIntegrationTests
             temp4.Should().HaveCountGreaterThan(0);
             response.Should().ContainItemsAssignableTo<QuestionModel>();
             response.Should().NotBeNull();
-            response[0].QuestionName.Should().Be("Jak¹ kuchnie wybierasz? ");
-            response[1].QuestionName.Should().Be("Ile czasu masz na przygotowanie posi³ku? ");
-            response[2].QuestionName.Should().Be("Wybierz trudnoœæ przygotowywanego posi³ku: ");
-            response[3].QuestionName.Should().Be("Wybierz podstawowy sk³adkik do posi³ku: ");
-            response[4].QuestionName.Should().Be("Wybierz kategoriê sk³adników: ");
+            response[0].QuestionName.Should().Be("JakÄ… kuchniÄ™ wybierasz? ");
+            response[1].QuestionName.Should().Be("Ile czasu masz na przygotowanie posiÅ‚ku? ");
+            response[2].QuestionName.Should().Be("Wybierz trudnoÅ›Ä‡ przygotowywanego posiÅ‚ku: ");
+            response[3].QuestionName.Should().Be("Wybierz podstawowy skÅ‚adnik do posiÅ‚ku: ");
+            response[4].QuestionName.Should().Be("Wybierz kategoriÄ™ skÅ‚adnikÃ³w ktÃ³re musi zawieraÄ‡ potrawa: ");
         }
+
         [Fact]
         public async Task GetDishTest()
         {
             var sut = _fixture.CreateSut();
-            
+
             List<QuestionModel> models = new List<QuestionModel>();
             models.Add(
-                new QuestionModel { 
+                new QuestionModel
+                {
                     QuestionId = 1,
-                    QuestionName = "MAIN_CATEGORY", 
-                    Answers = new List<AnswerModel> { 
+                    QuestionName = "MAIN_CATEGORY",
+                    Answers = new List<AnswerModel>
+                    {
                         new AnswerModel
                         {
                             AnswerId = 1,
-                            AnswerName = "Chiñska",
+                            AnswerName = "ChiÅ„ska",
                             isPicked = true
                         }
-                        } });
+                    }
+                });
 
             models.Add(
                 new QuestionModel
                 {
                     QuestionId = 2,
                     QuestionName = "MAKE_TIME_MIN",
-                    Answers = new List<AnswerModel> {
+                    Answers = new List<AnswerModel>
+                    {
                         new AnswerModel
                         {
                             AnswerId = 1,
                             AnswerName = "30",
                             isPicked = true
                         }
-                        }
+                    }
                 });
             models.Add(
                 new QuestionModel
                 {
                     QuestionId = 3,
                     QuestionName = "PREPARATION_DIFFICULTY",
-                    Answers = new List<AnswerModel> {
+                    Answers = new List<AnswerModel>
+                    {
                         new AnswerModel
                         {
                             AnswerId = 1,
-                            AnswerName = "³atwy",
+                            AnswerName = "Å‚atwy",
                             isPicked = true
                         }
-                        }
+                    }
                 });
             models.Add(
                 new QuestionModel
                 {
                     QuestionId = 4,
                     QuestionName = "INGREDIENTS_CATEGORY",
-                    Answers = new List<AnswerModel> {
+                    Answers = new List<AnswerModel>
+                    {
                         new AnswerModel
                         {
                             AnswerId = 1,
                             AnswerName = "Oba",
                             isPicked = true
                         }
-                        }
+                    }
                 });
             models.Add(
                 new QuestionModel
                 {
                     QuestionId = 5,
                     QuestionName = "INGREDIENTS_TAGS",
-                    Answers = new List<AnswerModel> {
+                    Answers = new List<AnswerModel>
+                    {
                         new AnswerModel
                         {
                             AnswerId = 1,
                             AnswerName = "Wieprzowina",
                             isPicked = true
                         }
-                        }
+                    }
                 });
 
             var response = await sut.GetDish(models);
 
             response.Should().NotBeNull();
-            response.Should().NotBeEmpty();
-            
         }
 
 
@@ -137,8 +138,6 @@ namespace DomainIntegrationTests
 
             private static IServiceCollection BuildDiContainer()
             {
-                
-
                 var serviceCollection = new ServiceCollection();
                 serviceCollection.AddLogging();
                 return serviceCollection.SetupDomainDi();

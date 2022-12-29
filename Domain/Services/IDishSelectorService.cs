@@ -11,5 +11,5 @@ public interface IDishSelectorService
     Task<List<QuestionModel>> GetThirdQuestion(List<QuestionModel> pytania);
     Task<List<QuestionModel>> GetFourthQuestion(List<QuestionModel> pytania);
     Task<List<QuestionModel>> GetFifthQuestion(List<QuestionModel> pytania);
-    Task<IEnumerable<DishModel>> GetDish(List<QuestionModel> questions);
+    Task<DishModel?> GetDish(List<QuestionModel> questions);
 }

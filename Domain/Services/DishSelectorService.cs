@@ -1,7 +1,6 @@
-﻿using Domain.Abstractions;
+﻿using System.Collections.Immutable;
+using Domain.Abstractions;
 using Domain.Models;
-using System.Collections;
-using DishModel = Domain.Models.DishModel;
 
 namespace Domain.Services;
 
@@ -9,6 +8,7 @@ public class DishSelectorService : IDishSelectorService
 {
     private readonly IDishDatabase _database;
     private readonly IDishQueryBuilder _queryBuilder;
+    private readonly Random _random = new();
 
     public DishSelectorService(IDishDatabase database, IDishQueryBuilder queryBuilder)
     {
@@ -33,16 +33,16 @@ public class DishSelectorService : IDishSelectorService
         return results;
     }
 
-    public async Task<List<QuestionModel>> GetFirstQuestion ()
+    public async Task<List<QuestionModel>> GetFirstQuestion()
     {
-        List<AnswerModel> odpowiedzi = new List<AnswerModel> ();
-        List<QuestionModel> pytania = new List<QuestionModel> ();
+        List<AnswerModel> odpowiedzi = new List<AnswerModel>();
+        List<QuestionModel> pytania = new List<QuestionModel>();
         QuestionModel quest = new QuestionModel();
         var kategorie = await _database.GetUniqueMainCategories();
         int loopCount = 1;
         quest.QuestionId = 1;
-        quest.QuestionName = "Jaką kuchnie wybierasz? ";
-        foreach (var item in kategorie) 
+        quest.QuestionName = "Jaką kuchnię wybierasz? ";
+        foreach (var item in kategorie)
         {
             AnswerModel answer = new AnswerModel();
             answer.AnswerId = loopCount;
@@ -50,15 +50,15 @@ public class DishSelectorService : IDishSelectorService
             answer.AnswerName = item;
             odpowiedzi.Add(answer);
         }
+
         quest.Answers = odpowiedzi;
         pytania.Add(quest);
-        
+
         return pytania;
     }
 
     public async Task<List<QuestionModel>> GetSecondQuestion(List<QuestionModel> pytania)
     {
-        
         List<AnswerModel> odpowiedzi = new List<AnswerModel>();
         QuestionModel quest = new QuestionModel();
         var prepTimes = await _database.GetUniquePreparationTime();
@@ -74,15 +74,15 @@ public class DishSelectorService : IDishSelectorService
             answer.isPicked = false;
             odpowiedzi.Add(answer);
         }
+
         quest.Answers = odpowiedzi;
         pytania.Add(quest);
 
         return pytania;
-        
     }
+
     public async Task<List<QuestionModel>> GetThirdQuestion(List<QuestionModel> pytania)
     {
-
         List<AnswerModel> odpowiedzi = new List<AnswerModel>();
         QuestionModel quest = new QuestionModel();
         var prepDiff = await _database.GetUniquePreparationDifficulty();
@@ -98,22 +98,21 @@ public class DishSelectorService : IDishSelectorService
             answer.isPicked = false;
             odpowiedzi.Add(answer);
         }
+
         quest.Answers = odpowiedzi;
         pytania.Add(quest);
 
         return pytania;
-
     }
+
     public async Task<List<QuestionModel>> GetFourthQuestion(List<QuestionModel> pytania)
     {
-        
-
         List<AnswerModel> odpowiedzi = new List<AnswerModel>();
         QuestionModel quest = new QuestionModel();
         var uniqueIngredients = await _database.GetUniqueIngredientsCategory();
         int loopCount = 1;
         quest.QuestionId = 4;
-        quest.QuestionName = "Wybierz podstawowy składkik do posiłku: ";
+        quest.QuestionName = "Wybierz podstawowy składnik do posiłku: ";
         foreach (var item in uniqueIngredients)
         {
             AnswerModel answer = new AnswerModel();
@@ -123,21 +122,21 @@ public class DishSelectorService : IDishSelectorService
             answer.isPicked = false;
             odpowiedzi.Add(answer);
         }
+
         quest.Answers = odpowiedzi;
         pytania.Add(quest);
 
         return pytania;
-
     }
+
     public async Task<List<QuestionModel>> GetFifthQuestion(List<QuestionModel> pytania)
     {
-
         List<AnswerModel> odpowiedzi = new List<AnswerModel>();
         QuestionModel quest = new QuestionModel();
         var uniqueIngredients = await _database.GetUniqueTags();
         int loopCount = 1;
         quest.QuestionId = 5;
-        quest.QuestionName = "Wybierz kategorię składników: ";
+        quest.QuestionName = "Wybierz kategorię składników które musi zawierać potrawa: ";
         foreach (var item in uniqueIngredients)
         {
             AnswerModel answer = new AnswerModel();
@@ -147,14 +146,14 @@ public class DishSelectorService : IDishSelectorService
             answer.isPicked = false;
             odpowiedzi.Add(answer);
         }
+
         quest.Answers = odpowiedzi;
         pytania.Add(quest);
 
         return pytania;
-
     }
 
-    public async Task<IEnumerable<DishModel>> GetDish(List<QuestionModel> questions)
+    public async Task<DishModel?> GetDish(List<QuestionModel> questions)
     {
         var mainCategoryToLookFor = new List<string>();
         var preparationTimeToLookFor = new List<int>();
@@ -164,13 +163,14 @@ public class DishSelectorService : IDishSelectorService
         if (questions.Count() == 5)
         {
             // Pytanie o kuchnie świata
-            foreach(var answer in questions[0].Answers)
+            foreach (var answer in questions[0].Answers)
             {
-                if(answer.isPicked == true)
+                if (answer.isPicked == true)
                 {
                     mainCategoryToLookFor.Add(answer.AnswerName);
                 }
             }
+
             // Pytanie o czas na przygotowanie posiłku
             foreach (var answer in questions[1].Answers)
             {
@@ -179,6 +179,7 @@ public class DishSelectorService : IDishSelectorService
                     preparationTimeToLookFor.Add(int.Parse(answer.AnswerName));
                 }
             }
+
             // Pytanie o trudność przygotowywanego posiłku
             foreach (var answer in questions[2].Answers)
             {
@@ -187,6 +188,7 @@ public class DishSelectorService : IDishSelectorService
                     preparationDifficultyToLookFor.Add(answer.AnswerName);
                 }
             }
+
             // Pytanie o podstawowy składkik do posiłku
             foreach (var answer in questions[3].Answers)
             {
@@ -195,6 +197,7 @@ public class DishSelectorService : IDishSelectorService
                     ingredientsCategoryToLookFor.Add(answer.AnswerName);
                 }
             }
+
             // Pytanie o kategorię składników
             foreach (var answer in questions[4].Answers)
             {
@@ -210,12 +213,13 @@ public class DishSelectorService : IDishSelectorService
             .AndWith(x => preparationTimeToLookFor.Contains(x.MakeTimeMin))
             .AndWith(x => preparationDifficultyToLookFor.Contains(x.PreparationDifficulty))
             .AndWith(x => ingredientsCategoryToLookFor.Contains(x.IngredientsCategory));
-        
         foreach (var ingredient in uniqueIngredientsToLookFor)
         {
             expression.AndWith(x => x.IngredientsTags.Contains(ingredient));
         }
-        
-        return await _database.SelectDishes(expression.BuildDishExpression());
+
+        var results = (await _database.SelectDishes(expression.BuildDishExpression())).ToImmutableList();
+
+        return results.Count == 0 ? null : results[_random.Next(0, results.Count)];
     }
 }
