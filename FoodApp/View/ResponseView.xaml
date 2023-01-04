@@ -1,0 +1,300 @@
+﻿<Window
+    x:Class="FoodApp.View.ResponseView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FoodApp.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="clr-namespace:FoodApp.ViewModel"
+    Title="ResponseView"
+    Width="800"
+    Height="450"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Normal"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <viewModel:ResponseViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+    </Window.Resources>
+    <Window.Visibility>
+        <Binding
+            Converter="{StaticResource BooleanToVisibility}"
+            Mode="TwoWay"
+            Path="IsViewVisible" />
+    </Window.Visibility>
+    <Border CornerRadius="25">
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/Cat.jpg" />
+        </Border.Background>
+        <Border
+            CornerRadius="20"
+            MouseDown="Border_MouseDown"
+            MouseLeftButtonDown="Border_MouseLeftButtonDown"
+            Opacity="0.95">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="#30106E" />
+                    <GradientStop Offset="0.75" Color="#280E5C" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
+
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontFamily="segoe ui light"
+                    FontSize="10"
+                    Foreground="White"
+                    Text="Response View" />
+                <Image
+                    Grid.Column="2"
+                    Height="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Source="/Images/image.png" />
+
+                <Button
+                    x:Name="btnColse"
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    HorizontalAlignment="Right"
+                    Click="BtnClose_Click"
+                    Content="X"
+                    FontFamily="segoe ui "
+                    FontSize="7"
+                    Foreground="White">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#FF0201" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#D80201" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                Width="18"
+                                Height="18"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="90">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button
+                    x:Name="btnMinimize"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="0,0,5,0"
+                    HorizontalAlignment="Right"
+                    Click="BtnMin_Click"
+                    Content="-"
+                    FontFamily="segoe ui "
+                    FontSize="15"
+                    Foreground="White">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#4641E0" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#3E3AC7" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                Width="18"
+                                Height="18"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="90">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Width="auto"
+                    Height="auto"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical">
+
+                    <TextBlock
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Center"
+                        FontFamily="segoe ui light"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="That's your dish" />
+
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="segoe ui"
+                        FontSize="15"
+                        Foreground="LightGray"
+                        Text="{Binding MessageToShow, IsAsync=True}" />
+
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="segoe ui light"
+                        FontSize="12"
+                        Foreground="LightGray"
+                        Text="{Binding AdditionalMessage}" />
+
+                    <Button
+                        x:Name="btnGoTo"
+                        Margin="0,30,0,0"
+                        HorizontalAlignment="Center"
+                        Command="{Binding OpenLinkCommand}"
+                        Content="Go to recpie"
+                        FontFamily="segoe ui "
+                        FontSize="15"
+                        Foreground="White">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#3E3AC7" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#5200C7" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="150"
+                                    Height="25"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button
+                        x:Name="btnNewTry"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"
+                        Command="{Binding NextTry}"
+                        Content="Try again!"
+                        FontFamily="segoe ui "
+                        FontSize="15"
+                        Foreground="White">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#3E3AC7" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#5200C7" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="150"
+                                    Height="25"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button
+                        x:Name="btnMenu"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"
+                        Command="{Binding goToMainView}"
+                        Content="Menu"
+                        FontFamily="segoe ui "
+                        FontSize="15"
+                        Foreground="White">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#3E3AC7" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#5200C7" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                    Width="150"
+                                    Height="25"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="segoe ui light"
+                    FontSize="10"
+                    Foreground="White"
+                    Text="Version 0.1" />
+
+            </Grid>
+
+        </Border>
+    </Border>
+</Window>
