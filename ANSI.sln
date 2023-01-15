@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{834FFE5D-8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseIntegrationTests", "DatabaseIntegrationTests\DatabaseIntegrationTests.csproj", "{38F13EFB-4A98-47AA-9457-FE7885E999FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainIntegrationTests", "DomainIntegrationTests\DomainIntegrationTests.csproj", "{FF700FA2-F86F-4438-9928-620D079076EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainIntegrationTests", "DomainIntegrationTests\DomainIntegrationTests.csproj", "{FF700FA2-F86F-4438-9928-620D079076EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontEnd", "FoodApp\FrontEnd.csproj", "{E88361A5-7437-430E-8E1B-A40BF3EC695B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{FF700FA2-F86F-4438-9928-620D079076EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF700FA2-F86F-4438-9928-620D079076EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF700FA2-F86F-4438-9928-620D079076EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E88361A5-7437-430E-8E1B-A40BF3EC695B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E88361A5-7437-430E-8E1B-A40BF3EC695B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E88361A5-7437-430E-8E1B-A40BF3EC695B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E88361A5-7437-430E-8E1B-A40BF3EC695B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{834FFE5D-815D-4D0E-B01F-99A8B5452921} = {1B6802D9-0C04-4653-87F7-202EE54E6D6B}
 		{38F13EFB-4A98-47AA-9457-FE7885E999FC} = {05E39194-548F-4158-97E0-2135395783F9}
 		{FF700FA2-F86F-4438-9928-620D079076EA} = {05E39194-548F-4158-97E0-2135395783F9}
+		{E88361A5-7437-430E-8E1B-A40BF3EC695B} = {6AAC3E2C-D9F9-489E-AE1B-3ACBE2775B7C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E219A762-35A7-49C9-BBBF-EA31B4C892A1}

@@ -142,7 +142,7 @@ public class DishSelectorService : IDishSelectorService
             AnswerModel answer = new AnswerModel();
             answer.AnswerId = loopCount;
             loopCount++;
-            //answer.AnswerName = item;
+            answer.AnswerName = item;
             answer.isPicked = false;
             odpowiedzi.Add(answer);
         }
@@ -150,6 +150,7 @@ public class DishSelectorService : IDishSelectorService
         quest.Answers = odpowiedzi;
         pytania.Add(quest);
 
+        
         return pytania;
     }
 
